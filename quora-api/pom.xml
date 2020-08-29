@@ -11,6 +11,10 @@
 
     <artifactId>quora-api</artifactId>
 
+    <properties>
+        <postgresql.driver.version>42.2.2</postgresql.driver.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -36,6 +40,7 @@
             <version>2.6.1</version>
             <scope>compile</scope>
         </dependency>
+
         <dependency>
             <groupId>com.upgrad.quora</groupId>
             <artifactId>quora-service</artifactId>
@@ -46,6 +51,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 
@@ -96,6 +107,7 @@
 
                 <executions>
                     <execution>
+                    <?m2e execute onConfiguration?> 
                         <id>user</id>
                         <goals>
                             <goal>generate</goal>
@@ -106,6 +118,7 @@
                         </configuration>
                     </execution>
                     <execution>
+                    <?m2e execute onConfiguration?> 
                         <id>common</id>
                         <goals>
                             <goal>generate</goal>
@@ -116,6 +129,7 @@
                         </configuration>
                     </execution>
                     <execution>
+                    <?m2e execute onConfiguration?> 
                         <id>admin</id>
                         <goals>
                             <goal>generate</goal>
@@ -126,6 +140,7 @@
                         </configuration>
                     </execution>
                     <execution>
+                    <?m2e execute onConfiguration?> 
                         <id>question</id>
                         <goals>
                             <goal>generate</goal>
@@ -136,6 +151,7 @@
                         </configuration>
                     </execution>
                     <execution>
+                    <?m2e execute onConfiguration?> 
                         <id>answer</id>
                         <goals>
                             <goal>generate</goal>

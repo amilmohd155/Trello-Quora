@@ -35,7 +35,6 @@
                 <artifactId>maven-resources-plugin</artifactId>
 
 
-                <version>2.7</version>
                 <configuration>
                     <delimiters>
                         <delimiter>@</delimiter>
@@ -50,6 +49,7 @@
                 <version>1.0-alpha-2</version>
                 <executions>
                     <execution>
+                    <?m2e execute onConfiguration?> 
                         <phase>initialize</phase>
                         <goals>
                             <goal>read-project-properties</goal>
