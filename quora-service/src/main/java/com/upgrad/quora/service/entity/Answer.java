@@ -21,10 +21,10 @@ public class Answer {
     private String ans;
     private Instant date;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", insertable = false, updatable = false)
     private Integer userId;
 
-    @Column(name = "question_id")
+    @Column(name = "question_id", insertable = false, updatable = false)
     private Integer questionId;
 
     @ManyToOne(cascade = CascadeType.ALL)

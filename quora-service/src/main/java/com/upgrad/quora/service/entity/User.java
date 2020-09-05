@@ -2,18 +2,36 @@ package com.upgrad.quora.service.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.apache.commons.lang3.builder.ToStringExclude;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @Entity
 @Table(name = "users")
-public class User {
+@NamedQueries(
+        {
+                @NamedQuery(
+                        name = "userByUuid",
+                        query = "select u from User u where u.uuid = :uuid"
+                ),
+                @NamedQuery(
+                        name = "userByEmail",
+                        query = "select u from User u where u.email =:email"
+                ),
+                @NamedQuery(
+                        name="userByUsername",
+                        query = "select u from User u where u.username =:username"
+                )
+        }
+)
+public class User  implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -28,11 +46,13 @@ public class User {
     @Column(unique = true, nullable = false)
     private String username;
 
-    @Column(unique = true, nullable = false)
+    @NotNull
     private String email;
 
+    @ToStringExclude
     private String password;
 
+    @NotNull
     private String salt;
 
     private String country;

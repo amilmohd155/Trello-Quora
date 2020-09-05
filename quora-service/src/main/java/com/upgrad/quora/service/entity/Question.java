@@ -22,7 +22,7 @@ public class Question {
     private String content;
     private Instant date;
 
-    @Column(name = "user_id")
+    @Column(name = "user_id", insertable = false, updatable = false)
     private Integer userId;
 
     @OneToMany(mappedBy = "question", cascade = {CascadeType.ALL})
