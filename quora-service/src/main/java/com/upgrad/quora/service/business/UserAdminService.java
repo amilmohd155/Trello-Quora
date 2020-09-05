@@ -2,7 +2,10 @@ package com.upgrad.quora.service.business;
 
 import com.upgrad.quora.service.dao.UserDao;
 import com.upgrad.quora.service.entity.User;
+import com.upgrad.quora.service.entity.UserAuth;
+import com.upgrad.quora.service.exception.AuthorizationFailedException;
 import com.upgrad.quora.service.exception.SignUpRestrictedException;
+import com.upgrad.quora.service.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -17,18 +20,20 @@ public class UserAdminService {
     @Autowired
     private PasswordCryptographyProvider cryptographyProvider;
 
-//    public User getUser(final String uuid, final String authToken)
-//            throws UserNotFoundException, AuthorizationFailedException {
-//
-//        UserAuth auth = userDao.getUserAuthToken(authToken);
-//        String role = auth.getUser().getRole();
-//
-//        if(role != null && role.equals("admin")){
-//            User user = userDao.getUser(uuid);
-//            if(user == null) throw new UserNotFoundException("USR-001", "User with entered uuid does not exist");
-//        }
-//
-//    }
+    public User getUser(final String uuid, final String authToken)
+            throws UserNotFoundException, AuthorizationFailedException {
+
+        UserAuth auth = userDao.getUserAuthToken(authToken);
+        String role = auth.getUser().getRole();
+
+        if(role != null && role.equals("admin")){
+            User user = userDao.getUser(uuid);
+            if(user == null) throw new UserNotFoundException("USR-001", "User with entered uuid does not exist");
+        }
+
+        return null;
+
+    }
 
     @Transactional(propagation = Propagation.REQUIRED)
     public User createUser(User user) throws SignUpRestrictedException {

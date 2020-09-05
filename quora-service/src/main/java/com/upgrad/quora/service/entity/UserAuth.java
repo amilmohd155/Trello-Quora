@@ -16,7 +16,7 @@ import java.time.Instant;
 @NamedQueries({
         @NamedQuery(
                 name = "userAuthTokenByAccessToken",
-                query = "select ut from UserAuth ut where ut.access_token =:accessToken"
+                query = "select ut from UserAuth ut where ut.accessToken =:accessToken"
         )
 })
 public class UserAuth {
@@ -32,9 +32,10 @@ public class UserAuth {
     @JsonIgnore
     private User user;
 
+    @Column(name = "access_token")
     @NotNull
     @Size(max = 500)
-    private String access_token;
+    private String accessToken;
 
     @NotNull
     private Instant expiresAt;
