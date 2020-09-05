@@ -35,7 +35,7 @@ public class UserController {
     //signup request
     @RequestMapping(
             method = RequestMethod.POST,
-            path = "/signup",
+            path = "/user/signup",
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
@@ -76,7 +76,7 @@ public class UserController {
     //Login request
     @RequestMapping(
             method = RequestMethod.POST,
-            path = "/login",
+            path = "/user/signin",
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
@@ -114,5 +114,8 @@ public class UserController {
         }
 
     }
+
+    //Sign out request "/user/signout"
+
 
 }

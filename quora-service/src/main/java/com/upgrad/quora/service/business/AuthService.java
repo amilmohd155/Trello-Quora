@@ -50,10 +50,9 @@ public class AuthService {
 
             userAuth.setLoginAt(loginAt.toInstant());
             userAuth.setExpiresAt(expiresAt.toInstant());
+            userAuth.setLogoutAt(null);
 
-            userDao.createAuthToken(userAuth);
-
-            return userAuth;
+            return userDao.createAuthToken(userAuth);
         }else
             throw new AuthenticationFailedException(
                     "ATH-002",

@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 import java.time.Instant;
 
@@ -43,7 +44,7 @@ public class UserAuth {
     @NotNull
     private Instant loginAt;
 
-    @NotNull
+    @Null
     private Instant logoutAt;
 
 }
