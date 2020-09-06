@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import static com.upgrad.quora.api.util.Basic64Splitter.splitter;
+
 @RestController
 @RequestMapping("/")
 public class CommonController {
@@ -25,13 +27,15 @@ public class CommonController {
     )
     ResponseEntity<UserDetailsResponse> getUserProfile(
             @Valid @PathVariable final String userId,
-            @RequestHeader("authorization") final String accessToken) {
+            @RequestHeader("authorization") final String authorization) {
+
+        final String[] decodedText = splitter(authorization);
 
         UserDetailsResponse response = new UserDetailsResponse();
 
         try {
 
-            final User user = service.getUser(userId, accessToken);
+            final User user = service.getUser(userId, decodedText[0]);
             response.firstName(user.getFirstName())
                     .lastName(user.getLastName())
                     .userName(user.getUsername())

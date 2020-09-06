@@ -24,7 +24,7 @@ public class QuestionService {
     private QuestionDao questionDao;
 
     @Autowired
-    private IQuestionDao IQuestionDao;
+    private IQuestionDao iQuestionDao;
 
     @Autowired
     private UserDao userDao;
@@ -67,7 +67,7 @@ public class QuestionService {
                     "User is signed out.Sign in first to get all questions"
             );
 
-        return IQuestionDao.findAll();
+        return iQuestionDao.findAll();
 
     }
 
@@ -95,7 +95,7 @@ public class QuestionService {
                     "User with entered uuid whose question details are to be seen does not exist"
             );
 
-        return IQuestionDao.findAllByUser(user);
+        return iQuestionDao.findAllByUser(user);
 
     }
 
@@ -117,7 +117,7 @@ public class QuestionService {
                     "User is signed out.Sign in first to edit the question"
             );
 
-        Optional<Question> question  = IQuestionDao.findByUuid(uuid);
+        Optional<Question> question  = iQuestionDao.findByUuid(uuid);
 
         if(!question.isPresent())
             throw new InvalidQuestionException(
@@ -133,12 +133,13 @@ public class QuestionService {
 
         question.get().setContent(content);
 
-        IQuestionDao.save(question.get());
+        iQuestionDao.save(question.get());
 
         return question.get().getUuid();
 
     }
 
+    @Transactional
     public String deleteQuestion(String uuid, String accessCode)
             throws AuthorizationFailedException, InvalidQuestionException{
 
@@ -156,7 +157,7 @@ public class QuestionService {
                     "User is signed out.Sign in first to delete a question"
             );
 
-        Optional<Question> question  = IQuestionDao.findByUuid(uuid);
+        Optional<Question> question  = iQuestionDao.findByUuid(uuid);
 
         if(!question.isPresent())
             throw new InvalidQuestionException(
@@ -173,10 +174,12 @@ public class QuestionService {
                     "Only the question owner or admin can delete the question"
             );
 
-        IQuestionDao.deleteById(question.get().getId());
+        iQuestionDao.deleteById(question.get().getId());
 
         return question.get().getUuid();
 
     }
+
+
 
 }

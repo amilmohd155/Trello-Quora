@@ -16,6 +16,8 @@ import javax.validation.Valid;
 import java.time.Instant;
 import java.util.*;
 
+import static com.upgrad.quora.api.util.Basic64Splitter.splitter;
+
 @RestController
 @RequestMapping("/")
 public class QuestionController {
@@ -30,8 +32,10 @@ public class QuestionController {
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE
     )
     public ResponseEntity<QuestionResponse> createQuestion(
-            @RequestHeader("authorization") final String accessToken,
+            @RequestHeader("authorization") final String authorization,
             final QuestionRequest request ) {
+
+        final String[] decodedText = splitter(authorization);
 
         Question question = new Question();
         question.setContent(request.getContent());
@@ -39,7 +43,7 @@ public class QuestionController {
         question.setDate(Instant.now());
 
         try {
-            question = questionService.createQ(accessToken, question);
+            question = questionService.createQ(decodedText[0], question);
 
             return new ResponseEntity<>(
                     new QuestionResponse()
@@ -63,10 +67,12 @@ public class QuestionController {
             path = "/question/all"
     )
     public ResponseEntity<List<QuestionDetailsResponse>> getAllQuestions(
-            @RequestHeader("authorization") final String accessToken) {
+            @RequestHeader("authorization") final String authorization) {
+
+        final String[] decodedText = splitter(authorization);
 
         try {
-            final List<Question> questions = questionService.getAllQ(accessToken);
+            final List<Question> questions = questionService.getAllQ(decodedText[0]);
 
             final List<QuestionDetailsResponse> responseList = new ArrayList<>();
 
@@ -94,11 +100,12 @@ public class QuestionController {
     public ResponseEntity<QuestionEditResponse> editQuestionContent(
             @Valid @PathVariable final String questionId,
             final QuestionEditRequest request,
-            @RequestHeader("authorization") final String accessToken) {
+            @RequestHeader("authorization") final String authorization) {
 
+        final String[] decodedText = splitter(authorization);
 
         try {
-            final String responseCode = questionService.editQContent(questionId, request.getContent(), accessToken);
+            final String responseCode = questionService.editQContent(questionId, request.getContent(), decodedText[0]);
 
             QuestionEditResponse response = new QuestionEditResponse()
                     .id(responseCode)
@@ -133,11 +140,12 @@ public class QuestionController {
     )
     public ResponseEntity<QuestionDeleteResponse> deleteQuestion(
             @Valid @PathVariable String questionId,
-            @RequestHeader("authorization") final String accessToken
-    ){
+            @RequestHeader("authorization") final String authorization){
+
+        final String[] decodedText = splitter(authorization);
 
         try {
-            String uuid = questionService.deleteQuestion(questionId, accessToken);
+            String uuid = questionService.deleteQuestion(questionId, decodedText[0]);
 
             return new ResponseEntity<>(
                     new QuestionDeleteResponse()
@@ -170,10 +178,12 @@ public class QuestionController {
     )
     public ResponseEntity<List<QuestionDetailsResponse>> getAllQuestionsByUser(
             @Valid @PathVariable String userId,
-            @RequestHeader("authorization") final String accessToken
-    ) {
+            @RequestHeader("authorization") final String authorization){
+
+        final String[] decodedText = splitter(authorization);
+
         try {
-            final List<Question> questions = questionService.getAllQByUser(userId, accessToken);
+            final List<Question> questions = questionService.getAllQByUser(userId, decodedText[0]);
 
             List<QuestionDetailsResponse> responseList = new ArrayList<>();
 
