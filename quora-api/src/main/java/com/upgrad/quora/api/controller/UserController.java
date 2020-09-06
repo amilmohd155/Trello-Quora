@@ -90,7 +90,7 @@ public class UserController {
             final UserAuth userAuth = authService.authenticate(decodedArray[0], decodedArray[1]);
 
             SigninResponse response = new SigninResponse()
-                    .id(UUID.randomUUID().toString())
+                    .id(userAuth.getUser().getUuid())
                     .message("SIGNED IN SUCCESSFULLY");
 
             HttpHeaders headers = new HttpHeaders();

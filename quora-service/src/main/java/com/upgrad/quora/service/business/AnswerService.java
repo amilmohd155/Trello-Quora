@@ -168,7 +168,7 @@ public class AnswerService {
                     "The question with entered uuid whose details are to be seen does not exist"
             );
 
-        return iAnswerDao.findAllByQuestion(questionUuid);
+        return iAnswerDao.findAllByQuestion(question);
 
     }
 
