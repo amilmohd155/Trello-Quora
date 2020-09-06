@@ -23,10 +23,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="47a15d9d-c79e-46a9-bbbf-df38ac55657d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/quora-api/src/main/java/com/upgrad/quora/api/controller/AnswerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/business/AnswerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/dao/AnswerDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/dao/IAnswerDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quora-api/src/main/java/com/upgrad/quora/api/controller/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/quora-api/src/main/java/com/upgrad/quora/api/controller/QuestionController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/business/QuestionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/business/QuestionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/dao/QuestionDaoInt.java" beforeDir="false" afterPath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/dao/QuestionDaoInt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/dao/QuestionDaoInt.java" beforeDir="false" afterPath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/dao/IQuestionDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,8 +42,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -297,7 +300,7 @@
       <workItem from="1599102856761" duration="8536000" />
       <workItem from="1599137823891" duration="15155000" />
       <workItem from="1599277896051" duration="26517000" />
-      <workItem from="1599364334879" duration="8722000" />
+      <workItem from="1599364334879" duration="12315000" />
     </task>
     <task id="LOCAL-00001" summary="entity created">
       <created>1599139040434</created>
@@ -348,7 +351,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599371317576</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="question get all by user id completed, bug fixes">
+      <created>1599374073307</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1599374073307</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -374,7 +384,8 @@
     <MESSAGE value="create question logic completed" />
     <MESSAGE value="question get all completed,&#10;fix needed at updating question content" />
     <MESSAGE value="edit question completed" />
-    <option name="LAST_COMMIT_MESSAGE" value="edit question completed" />
+    <MESSAGE value="question get all by user id completed, bug fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="question get all by user id completed, bug fixes" />
   </component>
   <component name="WindowStateProjectService">
     <state x="668" y="304" key="#Assign_Data_Sources" timestamp="1599292779868">
@@ -393,42 +404,46 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1599281194395" />
+    <state x="322" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1599385729472">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="322" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1599385729472" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1599281080876">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1599281080876" />
-    <state width="1493" height="275" key="GridCell.Tab.0.bottom" timestamp="1599364788915">
+    <state width="1493" height="275" key="GridCell.Tab.0.bottom" timestamp="1599375241735">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1599364788915" />
-    <state width="1493" height="275" key="GridCell.Tab.0.center" timestamp="1599364788914">
+    <state width="1493" height="275" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1599375241735" />
+    <state width="1493" height="275" key="GridCell.Tab.0.center" timestamp="1599375241735">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1599364788914" />
-    <state width="1493" height="275" key="GridCell.Tab.0.left" timestamp="1599364788914">
+    <state width="1493" height="275" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1599375241735" />
+    <state width="1493" height="275" key="GridCell.Tab.0.left" timestamp="1599375241734">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1599364788914" />
-    <state width="1493" height="275" key="GridCell.Tab.0.right" timestamp="1599364788915">
+    <state width="1493" height="275" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1599375241734" />
+    <state width="1493" height="275" key="GridCell.Tab.0.right" timestamp="1599375241735">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1599364788915" />
-    <state width="1493" height="275" key="GridCell.Tab.1.bottom" timestamp="1599364788915">
+    <state width="1493" height="275" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1599375241735" />
+    <state width="1493" height="275" key="GridCell.Tab.1.bottom" timestamp="1599375241736">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1599364788915" />
-    <state width="1493" height="275" key="GridCell.Tab.1.center" timestamp="1599364788915">
+    <state width="1493" height="275" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1599375241736" />
+    <state width="1493" height="275" key="GridCell.Tab.1.center" timestamp="1599375241735">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1599364788915" />
-    <state width="1493" height="275" key="GridCell.Tab.1.left" timestamp="1599364788915">
+    <state width="1493" height="275" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1599375241735" />
+    <state width="1493" height="275" key="GridCell.Tab.1.left" timestamp="1599375241735">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1599364788915" />
-    <state width="1493" height="275" key="GridCell.Tab.1.right" timestamp="1599364788915">
+    <state width="1493" height="275" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1599375241735" />
+    <state width="1493" height="275" key="GridCell.Tab.1.right" timestamp="1599375241735">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1599364788915" />
+    <state width="1493" height="275" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1599375241735" />
     <state x="249" y="0" key="SettingsEditor" timestamp="1598714545290">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -445,10 +460,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1599309777635" />
-    <state x="430" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1599321735402">
+    <state x="430" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1599375440734">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="430" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1599321735402" />
+    <state x="430" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1599375440734" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

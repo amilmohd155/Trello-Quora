@@ -1,7 +1,7 @@
 package com.upgrad.quora.service.business;
 
 import com.upgrad.quora.service.dao.QuestionDao;
-import com.upgrad.quora.service.dao.QuestionDaoInt;
+import com.upgrad.quora.service.dao.IQuestionDao;
 import com.upgrad.quora.service.dao.UserDao;
 import com.upgrad.quora.service.entity.Question;
 import com.upgrad.quora.service.entity.User;
@@ -24,7 +24,7 @@ public class QuestionService {
     private QuestionDao questionDao;
 
     @Autowired
-    private QuestionDaoInt questionDaoInt;
+    private IQuestionDao IQuestionDao;
 
     @Autowired
     private UserDao userDao;
@@ -67,7 +67,7 @@ public class QuestionService {
                     "User is signed out.Sign in first to get all questions"
             );
 
-        return questionDaoInt.findAll();
+        return IQuestionDao.findAll();
 
     }
 
@@ -95,10 +95,11 @@ public class QuestionService {
                     "User with entered uuid whose question details are to be seen does not exist"
             );
 
-        return questionDaoInt.findAllByUser(user);
+        return IQuestionDao.findAllByUser(user);
 
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public String editQContent(String uuid, String content, String accessCode)
             throws AuthorizationFailedException, InvalidQuestionException {
 
@@ -116,7 +117,7 @@ public class QuestionService {
                     "User is signed out.Sign in first to edit the question"
             );
 
-        Optional<Question> question  = questionDaoInt.findByUuid(uuid);
+        Optional<Question> question  = IQuestionDao.findByUuid(uuid);
 
         if(!question.isPresent())
             throw new InvalidQuestionException(
@@ -132,7 +133,7 @@ public class QuestionService {
 
         question.get().setContent(content);
 
-        questionDaoInt.save(question.get());
+        IQuestionDao.save(question.get());
 
         return question.get().getUuid();
 
@@ -155,7 +156,7 @@ public class QuestionService {
                     "User is signed out.Sign in first to delete a question"
             );
 
-        Optional<Question> question  = questionDaoInt.findByUuid(uuid);
+        Optional<Question> question  = IQuestionDao.findByUuid(uuid);
 
         if(!question.isPresent())
             throw new InvalidQuestionException(
@@ -172,7 +173,7 @@ public class QuestionService {
                     "Only the question owner or admin can delete the question"
             );
 
-        questionDaoInt.deleteById(question.get().getId());
+        IQuestionDao.deleteById(question.get().getId());
 
         return question.get().getUuid();
 
