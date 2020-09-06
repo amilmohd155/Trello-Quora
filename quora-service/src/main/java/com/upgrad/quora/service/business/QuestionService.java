@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class QuestionService {
@@ -64,11 +65,11 @@ public class QuestionService {
                     "User is signed out.Sign in first to get all questions"
             );
 
-        return questionDaoInt.findAllByQuestions_Uuid(userAuth.getUuid());
+        return questionDaoInt.findAllByUser(userAuth.getUser());
 
     }
 
-    public Question editQContent(String uuid, String content, String accessCode)
+    public String editQContent(String uuid, String content, String accessCode)
             throws AuthorizationFailedException, InvalidQuestionException {
 
         UserAuth userAuth = userDao.getUserAuthToken(accessCode);
@@ -85,8 +86,25 @@ public class QuestionService {
                     "User is signed out.Sign in first to edit the question"
             );
 
-        Question question = questionDao.getQuestionByUuid(uuid);
+        Optional<Question> question  = questionDaoInt.findByUuid(uuid);
 
+        if(!question.isPresent())
+            throw new InvalidQuestionException(
+                "QUES-001",
+                "Entered question uuid does not exist"
+            );
+
+        if(!userAuth.getUser().getUuid().equals(question.get().getUser().getUuid()))
+            throw new AuthorizationFailedException(
+                "ATHR-003",
+                "Only the question owner can edit the question"
+            );
+
+        question.get().setContent(content);
+
+        questionDaoInt.save(question.get());
+
+        return question.get().getUuid();
 
 
     }

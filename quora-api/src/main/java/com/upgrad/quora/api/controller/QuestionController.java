@@ -4,6 +4,7 @@ import com.upgrad.quora.api.model.*;
 import com.upgrad.quora.service.business.QuestionService;
 import com.upgrad.quora.service.entity.Question;
 import com.upgrad.quora.service.exception.AuthorizationFailedException;
+import com.upgrad.quora.service.exception.InvalidQuestionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -65,7 +66,9 @@ public class QuestionController {
 
         try {
             final List<Question> questions = questionService.getAllQ(accessToken);
+
             final List<QuestionDetailsResponse> responseList = new ArrayList<>();
+
             Optional.ofNullable(questions)
                     .orElse(Collections.emptyList())
                     .forEach(e -> {
@@ -88,12 +91,40 @@ public class QuestionController {
             path = "/question/edit/{questionId}"
     )
     public ResponseEntity<QuestionEditResponse> editQuestionContent(
-            @Valid @PathVariable final String questionID,
+            @Valid @PathVariable final String questionId,
             final QuestionEditRequest request,
             @RequestHeader("authorization") final String accessToken) {
 
-        return null;
+
+        try {
+            final String responseCode = questionService.editQContent(questionId, request.getContent(), accessToken);
+
+            QuestionEditResponse response = new QuestionEditResponse()
+                    .id(responseCode)
+                    .status("QUESTION EDITED");
+
+            return new ResponseEntity<>(
+                    response,
+                    HttpStatus.OK
+            );
+        } catch (AuthorizationFailedException e) {
+            return new ResponseEntity<>(
+                    new QuestionEditResponse()
+                            .id(e.getCode())
+                            .status(e.getErrorMessage()),
+                    HttpStatus.FORBIDDEN
+            );
+        } catch (InvalidQuestionException e) {
+            return new ResponseEntity<>(
+                    new QuestionEditResponse()
+                            .id(e.getCode())
+                            .status(e.getErrorMessage()),
+                    HttpStatus.UNAUTHORIZED
+            );
+        }
 
     }
+
+
 
 }

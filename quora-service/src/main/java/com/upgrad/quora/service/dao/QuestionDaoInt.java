@@ -5,11 +5,12 @@ import com.upgrad.quora.service.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface QuestionDaoInt extends JpaRepository<User, Long> {
+public interface QuestionDaoInt extends JpaRepository<Question, Long> {
 
-    List<Question> findAllByQuestions_Uuid(String uuid);
+    List<Question> findAllByUser(User user);
 
-    Question findByUuid(String uuid);
+    Optional<Question> findByUuid(String uuid);
 
 }
