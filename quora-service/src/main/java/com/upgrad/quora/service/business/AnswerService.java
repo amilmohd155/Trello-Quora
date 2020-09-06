@@ -7,12 +7,15 @@ import com.upgrad.quora.service.dao.UserDao;
 import com.upgrad.quora.service.entity.Answer;
 import com.upgrad.quora.service.entity.Question;
 import com.upgrad.quora.service.entity.UserAuth;
+import com.upgrad.quora.service.exception.AnswerNotFoundException;
 import com.upgrad.quora.service.exception.AuthorizationFailedException;
 import com.upgrad.quora.service.exception.InvalidQuestionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 public class AnswerService {
@@ -60,4 +63,102 @@ public class AnswerService {
 
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
+    public String editAContent(String uuid, String ans, String accessCode)
+            throws AuthorizationFailedException, AnswerNotFoundException {
+
+        UserAuth userAuth = userDao.getUserAuthToken(accessCode);
+
+        if(userAuth == null)
+            throw new AuthorizationFailedException(
+                    "ATHR-001",
+                    "User has not signed in"
+            );
+
+        if(userAuth.getLogoutAt() != null)
+            throw new AuthorizationFailedException(
+                    "ATHR-002",
+                    "User is signed out.Sign in first to edit an answer"
+            );
+
+        final Optional<Answer> answer = iAnswerDao.findByUuid(uuid);
+
+        if(!answer.isPresent())
+            throw new AnswerNotFoundException(
+                    "ANS-001",
+                    "Entered answer uuid does not exist"
+            );
+
+        if(!userAuth.getUser().getUuid()
+                .equals(answer.get().getUser().getUuid()))
+            throw new AuthorizationFailedException(
+                    "ATHR-003",
+                    "Only the answer owner can edit the answer"
+            );
+        answer.get().setAns(ans);
+        iAnswerDao.save(answer.get());
+
+        return answer.get().getUuid();
+
+    }
+
+    @Transactional
+    public String deleteAnswer(String uuid, String accessToken)
+            throws AuthorizationFailedException,AnswerNotFoundException {
+
+        UserAuth userAuth = userDao.getUserAuthToken(accessToken);
+
+        if(userAuth == null)
+            throw new AuthorizationFailedException(
+                    "ATHR-001",
+                    "User has not signed in"
+            );
+
+        if(userAuth.getLogoutAt() != null)
+            throw new AuthorizationFailedException(
+                    "ATHR-002",
+                    "User is signed out.Sign in first to delete an answer"
+            );
+
+        Optional<Answer> answer = iAnswerDao.findByUuid(uuid);
+
+        if(!answer.isPresent())
+            throw new AnswerNotFoundException(
+                    "ANS-001",
+                    "Entered answer uuid does not exist"
+            );
+
+        if(!userAuth.getUser().getUuid()
+                .equals(answer.get().getUser().getUuid())
+                ||
+                !userAuth.getUser().getRole()
+                        .equals("admin")
+        ) throw new AuthorizationFailedException(
+                    "ATHR-003",
+                    "Only the answer owner or admin can delete the answer"
+            );
+
+        iAnswerDao.deleteById(answer.get().getId());
+
+        return answer.get().getUuid();
+
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
