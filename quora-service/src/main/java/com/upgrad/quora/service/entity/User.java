@@ -25,7 +25,7 @@ import java.util.List;
                 @NamedQuery(
                         name="userByUsername",
                         query = "select u from User u where u.username =:username"
-                )
+                ),
         }
 )
 public class User  implements Serializable {

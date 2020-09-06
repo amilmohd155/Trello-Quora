@@ -12,6 +12,12 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "question")
+@NamedQueries(
+        @NamedQuery(
+                name="questionByUuid",
+                query = "SELECT q FROM Question q WHERE q.uuid =: uuid"
+        )
+)
 public class Question {
 
     @Id
@@ -21,9 +27,6 @@ public class Question {
     private String uuid;
     private String content;
     private Instant date;
-
-    @Column(name = "user_id", insertable = false, updatable = false)
-    private Integer userId;
 
     @OneToMany(mappedBy = "question", cascade = {CascadeType.ALL})
     @JsonIgnore

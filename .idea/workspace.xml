@@ -23,11 +23,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="47a15d9d-c79e-46a9-bbbf-df38ac55657d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/quora-api/src/main/java/com/upgrad/quora/api/controller/QuestionController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/business/QuestionService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/dao/QuestionDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/dao/QuestionDaoInt.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quora-api/src/main/java/com/upgrad/quora/api/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/quora-api/src/main/java/com/upgrad/quora/api/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quora-api/src/main/java/com/upgrad/quora/api/controller/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/quora-api/src/main/java/com/upgrad/quora/api/controller/QuestionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/ServiceConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/ServiceConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/business/QuestionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/business/QuestionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/dao/QuestionDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/dao/QuestionDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/dao/UserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/entity/Answer.java" beforeDir="false" afterPath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/entity/Answer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/entity/Question.java" beforeDir="false" afterPath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/entity/Question.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/quora-service/src/main/java/com/upgrad/quora/service/entity/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,8 +45,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -105,18 +110,30 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.QuoraApiApplication">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="quora [clean]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+              </list>
+            </option>
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
     </configuration>
     <configuration name="quora-api [clean]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
       <MavenSettings>
@@ -206,22 +223,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SwaggerCodegen: admin.json" type="SwaggerCodegen" temporary="true">
-      <option name="activeConfigurationType" value="FILE" />
-      <option name="configurationPath" value="" />
-      <option name="customJreEnabled" value="false" />
-      <option name="customTemplatesPath" value="" />
-      <option name="enableDebugLogging" value="false" />
-      <option name="generateToPath" value="" />
-      <option name="generationParameters">
-        <list />
-      </option>
-      <option name="generatorPath" value="" />
-      <option name="jdkPath" value="Default" />
-      <option name="language" value="" />
-      <option name="specificationPath" value="D:\Projects\SpringBoot Projects\Trello-Quora\quora-api\src\main\resources\endpoints\admin.json" />
-      <method v="2" />
-    </configuration>
     <configuration default="true" type="SwaggerCodegen">
       <option name="activeConfigurationType" value="FILE" />
       <option name="configurationPath" value="" />
@@ -235,23 +236,23 @@
       <option name="generatorPath" value="" />
       <option name="jdkPath" value="Default" />
       <option name="language" value="" />
-      <option name="specificationPath" value="D:\Projects\SpringBoot Projects\Trello-Quora\quora-api\src\main\resources\endpoints\admin.json" />
+      <option name="specificationPath" value="D:\Projects\SpringBoot Projects\Trello-Quora\quora-api\src\main\resources\endpoints\question.json" />
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Spring Boot.QuoraApiApplication" />
-      <item itemvalue="Swagger Codegen.SwaggerCodegen: admin.json" />
       <item itemvalue="Maven.quora-api [clean]" />
       <item itemvalue="Maven.quora-api [install]" />
       <item itemvalue="Maven.quora-api [compile]" />
+      <item itemvalue="Maven.quora [clean]" />
+      <item itemvalue="Spring Boot.QuoraApiApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.QuoraApiApplication" />
+        <item itemvalue="Maven.quora [clean]" />
         <item itemvalue="Maven.quora-api [compile]" />
         <item itemvalue="Maven.quora-api [install]" />
         <item itemvalue="Maven.quora-api [clean]" />
-        <item itemvalue="Swagger Codegen.SwaggerCodegen: admin.json" />
-        <item itemvalue="Spring Boot.QuoraApiApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -290,7 +291,8 @@
       <workItem from="1599017709334" duration="6139000" />
       <workItem from="1599102856761" duration="8536000" />
       <workItem from="1599137823891" duration="15155000" />
-      <workItem from="1599277896051" duration="17870000" />
+      <workItem from="1599277896051" duration="26517000" />
+      <workItem from="1599364334879" duration="2126000" />
     </task>
     <task id="LOCAL-00001" summary="entity created">
       <created>1599139040434</created>
@@ -320,7 +322,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599295043164</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="create question logic completed">
+      <created>1599310714969</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1599310714969</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -343,13 +352,18 @@
     <MESSAGE value="sigup logic created,  controller fix needed, json response model not created" />
     <MESSAGE value="signup and login implemented" />
     <MESSAGE value="get user profile api call implemented, fixes on login logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="get user profile api call implemented, fixes on login logic" />
+    <MESSAGE value="create question logic completed" />
+    <option name="LAST_COMMIT_MESSAGE" value="create question logic completed" />
   </component>
   <component name="WindowStateProjectService">
     <state x="668" y="304" key="#Assign_Data_Sources" timestamp="1599292779868">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="668" y="304" key="#Assign_Data_Sources/0.0.1536.824@0.0.1536.824" timestamp="1599292779868" />
+    <state x="395" y="91" key="#Inspections" timestamp="1599318458046">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="395" y="91" key="#Inspections/0.0.1536.824@0.0.1536.824" timestamp="1599318458046" />
     <state x="499" y="167" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1599285145267">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -362,38 +376,38 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1599281080876" />
-    <state width="1493" height="275" key="GridCell.Tab.0.bottom" timestamp="1599282114586">
+    <state width="1493" height="275" key="GridCell.Tab.0.bottom" timestamp="1599364788915">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1599282114586" />
-    <state width="1493" height="275" key="GridCell.Tab.0.center" timestamp="1599282114586">
+    <state width="1493" height="275" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1599364788915" />
+    <state width="1493" height="275" key="GridCell.Tab.0.center" timestamp="1599364788914">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1599282114586" />
-    <state width="1493" height="275" key="GridCell.Tab.0.left" timestamp="1599282114586">
+    <state width="1493" height="275" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1599364788914" />
+    <state width="1493" height="275" key="GridCell.Tab.0.left" timestamp="1599364788914">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1599282114586" />
-    <state width="1493" height="275" key="GridCell.Tab.0.right" timestamp="1599282114586">
+    <state width="1493" height="275" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1599364788914" />
+    <state width="1493" height="275" key="GridCell.Tab.0.right" timestamp="1599364788915">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1599282114586" />
-    <state width="1493" height="275" key="GridCell.Tab.1.bottom" timestamp="1599281275714">
+    <state width="1493" height="275" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1599364788915" />
+    <state width="1493" height="275" key="GridCell.Tab.1.bottom" timestamp="1599364788915">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1599281275714" />
-    <state width="1493" height="275" key="GridCell.Tab.1.center" timestamp="1599281275712">
+    <state width="1493" height="275" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1599364788915" />
+    <state width="1493" height="275" key="GridCell.Tab.1.center" timestamp="1599364788915">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1599281275712" />
-    <state width="1493" height="275" key="GridCell.Tab.1.left" timestamp="1599281275712">
+    <state width="1493" height="275" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1599364788915" />
+    <state width="1493" height="275" key="GridCell.Tab.1.left" timestamp="1599364788915">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1599281275712" />
-    <state width="1493" height="275" key="GridCell.Tab.1.right" timestamp="1599281275712">
+    <state width="1493" height="275" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1599364788915" />
+    <state width="1493" height="275" key="GridCell.Tab.1.right" timestamp="1599364788915">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1599281275712" />
+    <state width="1493" height="275" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1599364788915" />
     <state x="249" y="0" key="SettingsEditor" timestamp="1598714545290">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -410,10 +424,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1599309777635" />
-    <state x="430" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1599291196319">
+    <state x="430" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1599321735402">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="430" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1599291196319" />
+    <state x="430" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1599321735402" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

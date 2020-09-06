@@ -1,7 +1,6 @@
 package com.upgrad.quora.api.controller;
 
-import com.upgrad.quora.api.model.QuestionRequest;
-import com.upgrad.quora.api.model.QuestionResponse;
+import com.upgrad.quora.api.model.*;
 import com.upgrad.quora.service.business.QuestionService;
 import com.upgrad.quora.service.entity.Question;
 import com.upgrad.quora.service.exception.AuthorizationFailedException;
@@ -9,14 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.Instant;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @RequestMapping("/")
@@ -64,9 +60,40 @@ public class QuestionController {
             method = RequestMethod.GET,
             path = "/question/all"
     )
-    public ResponseEntity<List<QuestionResponse>> getAllQuestions(
+    public ResponseEntity<List<QuestionDetailsResponse>> getAllQuestions(
             @RequestHeader("authorization") final String accessToken) {
+
+        try {
+            final List<Question> questions = questionService.getAllQ(accessToken);
+            final List<QuestionDetailsResponse> responseList = new ArrayList<>();
+            Optional.ofNullable(questions)
+                    .orElse(Collections.emptyList())
+                    .forEach(e -> {
+                        QuestionDetailsResponse response = new QuestionDetailsResponse()
+                                .id(e.getUuid())
+                                .content(e.getContent());
+                        responseList.add(response);
+                    });
+
+            return new ResponseEntity<>(responseList, HttpStatus.OK);
+
+
+        } catch (AuthorizationFailedException e) {
+            return null;
+        }
+    }
+
+    @RequestMapping(
+            method = RequestMethod.PUT,
+            path = "/question/edit/{questionId}"
+    )
+    public ResponseEntity<QuestionEditResponse> editQuestionContent(
+            @Valid @PathVariable final String questionID,
+            final QuestionEditRequest request,
+            @RequestHeader("authorization") final String accessToken) {
+
         return null;
+
     }
 
 }

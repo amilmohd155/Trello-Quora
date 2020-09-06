@@ -21,12 +21,6 @@ public class Answer {
     private String ans;
     private Instant date;
 
-    @Column(name = "user_id", insertable = false, updatable = false)
-    private Integer userId;
-
-    @Column(name = "question_id", insertable = false, updatable = false)
-    private Integer questionId;
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "question_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
