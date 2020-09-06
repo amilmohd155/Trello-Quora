@@ -4,9 +4,11 @@ import com.upgrad.quora.service.dao.QuestionDao;
 import com.upgrad.quora.service.dao.QuestionDaoInt;
 import com.upgrad.quora.service.dao.UserDao;
 import com.upgrad.quora.service.entity.Question;
+import com.upgrad.quora.service.entity.User;
 import com.upgrad.quora.service.entity.UserAuth;
 import com.upgrad.quora.service.exception.AuthorizationFailedException;
 import com.upgrad.quora.service.exception.InvalidQuestionException;
+import com.upgrad.quora.service.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -65,7 +67,35 @@ public class QuestionService {
                     "User is signed out.Sign in first to get all questions"
             );
 
-        return questionDaoInt.findAllByUser(userAuth.getUser());
+        return questionDaoInt.findAll();
+
+    }
+
+    public List<Question> getAllQByUser(String uuid, String accessCode)
+            throws AuthorizationFailedException, UserNotFoundException {
+
+        UserAuth userAuth = userDao.getUserAuthToken(accessCode);
+
+        if(userAuth == null)
+            throw new AuthorizationFailedException(
+                    "ATHR-001",
+                    "User has not signed in"
+            );
+        if(userAuth.getLogoutAt() != null)
+            throw new AuthorizationFailedException(
+                    "ATHR-002",
+                    "User is signed out.Sign in first to get all questions posted by a specific user"
+            );
+
+        User user = userDao.getUser(uuid);
+
+        if(user == null)
+            throw new UserNotFoundException(
+                    "USR-001",
+                    "User with entered uuid whose question details are to be seen does not exist"
+            );
+
+        return questionDaoInt.findAllByUser(user);
 
     }
 
@@ -106,6 +136,45 @@ public class QuestionService {
 
         return question.get().getUuid();
 
+    }
+
+    public String deleteQuestion(String uuid, String accessCode)
+            throws AuthorizationFailedException, InvalidQuestionException{
+
+        UserAuth userAuth = userDao.getUserAuthToken(accessCode);
+
+        if(userAuth == null)
+            throw new AuthorizationFailedException(
+                    "ATHR-001",
+                    "User has not signed in"
+            );
+
+        if(userAuth.getLogoutAt() != null)
+            throw new AuthorizationFailedException(
+                    "ATHR-002",
+                    "User is signed out.Sign in first to delete a question"
+            );
+
+        Optional<Question> question  = questionDaoInt.findByUuid(uuid);
+
+        if(!question.isPresent())
+            throw new InvalidQuestionException(
+                    "QUES-001",
+                    "Entered question uuid does not exist"
+            );
+
+        if(!userAuth.getUser().getUuid()
+                .equals(question.get().getUser().getUuid())
+                || !userAuth.getUser().getRole()
+                        .equals("admin")
+        ) throw new AuthorizationFailedException(
+                    "ATHR-003",
+                    "Only the question owner or admin can delete the question"
+            );
+
+        questionDaoInt.deleteById(question.get().getId());
+
+        return question.get().getUuid();
 
     }
 

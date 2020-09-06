@@ -5,6 +5,7 @@ import com.upgrad.quora.service.business.QuestionService;
 import com.upgrad.quora.service.entity.Question;
 import com.upgrad.quora.service.exception.AuthorizationFailedException;
 import com.upgrad.quora.service.exception.InvalidQuestionException;
+import com.upgrad.quora.service.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -82,7 +83,7 @@ public class QuestionController {
 
 
         } catch (AuthorizationFailedException e) {
-            return null;
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
 
@@ -125,6 +126,75 @@ public class QuestionController {
 
     }
 
+
+    @RequestMapping(
+            method = RequestMethod.DELETE,
+            path = "/question/delete/{questionId}"
+    )
+    public ResponseEntity<QuestionDeleteResponse> deleteQuestion(
+            @Valid @PathVariable String questionId,
+            @RequestHeader("authorization") final String accessToken
+    ){
+
+        try {
+            String uuid = questionService.deleteQuestion(questionId, accessToken);
+
+            return new ResponseEntity<>(
+                    new QuestionDeleteResponse()
+                            .id(uuid)
+                            .status("QUESTION DELETED"),
+                    HttpStatus.OK
+            );
+
+        } catch (AuthorizationFailedException e) {
+            return new ResponseEntity<>(
+                    new QuestionDeleteResponse()
+                            .id(e.getCode())
+                            .status(e.getErrorMessage()),
+                    HttpStatus.FORBIDDEN
+            );
+        } catch (InvalidQuestionException e) {
+            return new ResponseEntity<>(
+                    new QuestionDeleteResponse()
+                            .id(e.getCode())
+                            .status(e.getErrorMessage()),
+                    HttpStatus.UNAUTHORIZED
+            );
+        }
+
+    }
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            path = "question/all/{userId}"
+    )
+    public ResponseEntity<List<QuestionDetailsResponse>> getAllQuestionsByUser(
+            @Valid @PathVariable String userId,
+            @RequestHeader("authorization") final String accessToken
+    ) {
+        try {
+            final List<Question> questions = questionService.getAllQByUser(userId, accessToken);
+
+            List<QuestionDetailsResponse> responseList = new ArrayList<>();
+
+            Optional.ofNullable(questions)
+                    .orElse(Collections.emptyList())
+                    .forEach(e -> {
+                        QuestionDetailsResponse response = new QuestionDetailsResponse()
+                                .id(e.getUuid())
+                                .content(e.getContent());
+                        responseList.add(response);
+                    });
+
+            return new ResponseEntity<>(responseList, HttpStatus.OK);
+
+        } catch (AuthorizationFailedException e) {
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        } catch (UserNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+    }
 
 
 }

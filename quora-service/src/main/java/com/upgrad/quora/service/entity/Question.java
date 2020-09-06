@@ -15,7 +15,7 @@ import java.util.List;
 @NamedQueries(
         @NamedQuery(
                 name="questionByUuid",
-                query = "SELECT q FROM Question q WHERE q.uuid =: uuid"
+                query = "SELECT q FROM Question q WHERE q.uuid =:uuid"
         )
 )
 public class Question {

@@ -297,7 +297,7 @@
       <workItem from="1599102856761" duration="8536000" />
       <workItem from="1599137823891" duration="15155000" />
       <workItem from="1599277896051" duration="26517000" />
-      <workItem from="1599364334879" duration="5703000" />
+      <workItem from="1599364334879" duration="8722000" />
     </task>
     <task id="LOCAL-00001" summary="entity created">
       <created>1599139040434</created>
@@ -341,7 +341,14 @@
       <option name="project" value="LOCAL" />
       <updated>1599367739130</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="edit question completed">
+      <created>1599371317576</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1599371317576</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -366,7 +373,8 @@
     <MESSAGE value="get user profile api call implemented, fixes on login logic" />
     <MESSAGE value="create question logic completed" />
     <MESSAGE value="question get all completed,&#10;fix needed at updating question content" />
-    <option name="LAST_COMMIT_MESSAGE" value="question get all completed,&#10;fix needed at updating question content" />
+    <MESSAGE value="edit question completed" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit question completed" />
   </component>
   <component name="WindowStateProjectService">
     <state x="668" y="304" key="#Assign_Data_Sources" timestamp="1599292779868">
