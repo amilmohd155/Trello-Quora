@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.Instant;
-import java.util.UUID;
+import java.util.*;
 
 import static com.upgrad.quora.api.util.Basic64Splitter.splitter;
 
@@ -150,6 +150,47 @@ public class AnswerController {
             );
 
         }
+
+    }
+
+    @RequestMapping(
+            method = RequestMethod.GET,
+            path = "answer/all/{questionId}"
+    )
+    public ResponseEntity<List<AnswerDetailsResponse>> getAllAnswersToQuestion(
+            @Valid @PathVariable final String questionId,
+            @RequestHeader("authorization") final String authorization) {
+
+        final String[] decodedText = splitter(authorization);
+
+        try {
+
+            final List<Answer> answers = answerService.getAllAnswer(questionId, decodedText[0]);
+            List<AnswerDetailsResponse> responseList = new ArrayList<>();
+
+            Optional.ofNullable(answers)
+                    .orElse(Collections.emptyList())
+                    .forEach(e -> {
+                        AnswerDetailsResponse response = new AnswerDetailsResponse()
+                                .id(e.getUuid())
+                                .answerContent(e.getAns())
+                                .questionContent(e.getQuestion().getContent());
+                        responseList.add(response);
+                    });
+
+            return new ResponseEntity<>(responseList, HttpStatus.OK);
+
+        } catch (AuthorizationFailedException e) {
+            e.printStackTrace();
+
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+
+        } catch (InvalidQuestionException e) {
+            e.printStackTrace();
+
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
 
     }
 
