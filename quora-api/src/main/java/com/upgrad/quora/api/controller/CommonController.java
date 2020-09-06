@@ -1,7 +1,7 @@
 package com.upgrad.quora.api.controller;
 
 import com.upgrad.quora.api.model.UserDetailsResponse;
-import com.upgrad.quora.service.business.SignupService;
+import com.upgrad.quora.service.business.UserService;
 import com.upgrad.quora.service.entity.User;
 import com.upgrad.quora.service.exception.AuthorizationFailedException;
 import com.upgrad.quora.service.exception.UserNotFoundException;
@@ -19,7 +19,7 @@ import static com.upgrad.quora.api.util.Basic64Splitter.splitter;
 public class CommonController {
 
     @Autowired
-    private SignupService service;
+    private UserService service;
 
     @RequestMapping(
             method = RequestMethod.GET,

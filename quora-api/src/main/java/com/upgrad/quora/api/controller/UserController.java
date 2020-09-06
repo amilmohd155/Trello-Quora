@@ -1,13 +1,15 @@
 package com.upgrad.quora.api.controller;
 
 import com.upgrad.quora.api.model.SigninResponse;
+import com.upgrad.quora.api.model.SignoutResponse;
 import com.upgrad.quora.api.model.SignupUserRequest;
 import com.upgrad.quora.api.model.SignupUserResponse;
 import com.upgrad.quora.service.business.AuthService;
-import com.upgrad.quora.service.business.SignupService;
+import com.upgrad.quora.service.business.UserService;
 import com.upgrad.quora.service.entity.User;
 import com.upgrad.quora.service.entity.UserAuth;
 import com.upgrad.quora.service.exception.AuthenticationFailedException;
+import com.upgrad.quora.service.exception.SignOutRestrictedException;
 import com.upgrad.quora.service.exception.SignUpRestrictedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -22,12 +24,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Base64;
 import java.util.UUID;
 
+import static com.upgrad.quora.api.util.Basic64Splitter.splitter;
+
 @RestController
 @RequestMapping("/api")
 public class UserController {
 
     @Autowired
-    private SignupService service;
+    private UserService service;
 
     @Autowired
     private AuthService authService;
@@ -116,6 +120,33 @@ public class UserController {
     }
 
     //Sign out request "/user/signout"
+    @RequestMapping(
+            method = RequestMethod.POST,
+            path = "/user/signout"
+    )
+    public ResponseEntity<SignoutResponse> signOut(@RequestHeader("authorization")final String authorization) {
+
+        final String[] decodedText = splitter(authorization);
+
+        try {
+            final String resCode = service.signOutUser(decodedText[0]);
+
+            return new ResponseEntity<>(
+                    new SignoutResponse().id(resCode).message("SIGNED OUT SUCCESSFULLY"),
+                    HttpStatus.OK
+            );
+
+        } catch (SignOutRestrictedException e) {
+            e.printStackTrace();
+
+            return new ResponseEntity<>(
+                    new SignoutResponse().id(e.getCode()).message(e.getErrorMessage()),
+                    HttpStatus.UNAUTHORIZED
+                    );
+
+        }
+
+    }
 
 
 }
